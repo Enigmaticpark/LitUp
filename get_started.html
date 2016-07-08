@@ -1,0 +1,618 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Get Started</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="data/apple-touch-icon.png" rel="apple-touch-icon"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/get_started/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="http://fonts.googleapis.com/css?family=Yellowtail" type="text/css" rel="stylesheet"/>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800" type="text/css" rel="stylesheet"/>
+    <link href="http://overpass-30e2.kxcdn.com/overpass.css" type="text/css" rel="stylesheet"/>
+    <link href="data/effects.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/axure/axQuery.js"></script>
+    <script src="resources/scripts/axure/globals.js"></script>
+    <script src="resources/scripts/axutils.js"></script>
+    <script src="resources/scripts/axure/annotation.js"></script>
+    <script src="resources/scripts/axure/axQuery.std.js"></script>
+    <script src="resources/scripts/axure/doc.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/messagecenter.js"></script>
+    <script src="resources/scripts/axure/events.js"></script>
+    <script src="resources/scripts/axure/action.js"></script>
+    <script src="resources/scripts/axure/expr.js"></script>
+    <script src="resources/scripts/axure/geometry.js"></script>
+    <script src="resources/scripts/axure/flyout.js"></script>
+    <script src="resources/scripts/axure/ie.js"></script>
+    <script src="resources/scripts/axure/model.js"></script>
+    <script src="resources/scripts/axure/repeater.js"></script>
+    <script src="resources/scripts/axure/sto.js"></script>
+    <script src="resources/scripts/axure/utils.temp.js"></script>
+    <script src="resources/scripts/axure/variables.js"></script>
+    <script src="resources/scripts/axure/drag.js"></script>
+    <script src="resources/scripts/axure/move.js"></script>
+    <script src="resources/scripts/axure/visibility.js"></script>
+    <script src="resources/scripts/axure/style.js"></script>
+    <script src="resources/scripts/axure/adaptive.js"></script>
+    <script src="resources/scripts/axure/tree.js"></script>
+    <script src="resources/scripts/axure/init.temp.js"></script>
+    <script src="files/get_started/data.js"></script>
+    <script src="resources/scripts/axure/legacy.js"></script>
+    <script src="resources/scripts/axure/viewer.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="files/get_started/overlaypopup.js"></script>
+    <link type="text/css" rel="stylesheet" href="files/get_started/overlaypopup.css" />
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+
+    </script>
+    
+	  <script>
+	  var map;
+	  var eventData;
+	  var prevWindow;
+	  var friendData;
+	  var markerArray = [];
+	  var markerContent =[];
+	  //var ECData = [];
+	  var eventArray = [];
+	  //var friendCountArray = [];
+	  var dataContainer = [];
+	
+	  function init(){
+	    
+	     
+	    
+	    var style0 = [];
+	    var styles = [
+  {
+    "featureType": "landscape",
+    "elementType": "geometry",
+    "stylers": [
+      { "color": "#617580" }
+    ]
+  },{
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      { "color": "#5388f6" },
+      { "weight": 0.4 }
+    ]
+  },{
+    "featureType": "landscape.natural",
+    "elementType": "geometry",
+    "stylers": [
+      { "color": "#617580" }
+    ]
+  },{
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      { "color": "#617580" }
+    ]
+  },{
+    "featureType": "transit",
+    "elementType": "geometry",
+    "stylers": [
+      { "hue": "#f6ff00" }
+    ]
+  },{
+    "featureType": "water",
+    "elementType": "geometry"  },{
+    "featureType": "road",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      { "weight": 2.4 }
+    ]
+  },{
+    "featureType": "poi",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      { "weight": 2.4 }
+    ]
+  },{
+    "featureType": "road",
+    "elementType": "labels.text.stroke"  },{
+    "featureType": "administrative",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      { "weight": 1 },
+      { "color": "#ffffa0" }
+    ]
+  }
+]
+	
+	var styledMap = new google.maps.StyledMapType(styles,
+	    {name: "Styled Map"});
+	var nostyle = new google.maps.StyledMapType(style0,
+	    {name: "Normal"});
+	
+	   map = new google.maps.Map(document.getElementById('map'), {
+	      center: {lat: 45.5083, lng: -73.5747},
+	      mapTypeControlOptions: {
+	        mapTypeIds: ['Normal', 'map_style']
+	        //position: google.maps.ControlPosition.BOTTOM_LEFT
+	      },
+	      zoom: 14
+	    });
+	
+	  map.mapTypes.set('map_style', styledMap);
+	  map.setMapTypeId('map_style');
+	  map.mapTypes.set('Normal', nostyle);
+	  map.setMapTypeId('Normal');
+	
+	  google.maps.event.addDomListener(document.getElementById('all'), 'click', function()
+	  {
+	      map.setMapTypeId('Normal');
+	  });
+	  google.maps.event.addDomListener(document.getElementById('friends'), 'click', function()
+	  {
+	      map.setMapTypeId('map_style');
+	  });
+	}
+	
+	
+	function statusChangeCallback(response) {
+	      //console.log('statusChangeCallback');
+	      //console.log(response);
+	      // The response object is returned with a status field that lets the
+	      // app know the current login status of the person.
+	      // Full docs on the response object can be found in the documentation
+	      // for FB.getLoginStatus().
+	      if (response.status === 'connected') {
+	        // Logged into your app and Facebook.
+	        $('.overlay-bg, .overlay-content').hide();
+	        testAPI();
+	      } else if (response.status === 'not_authorized') {
+	        // The person is logged into Facebook, but not your app.
+	        document.getElementById('status').innerHTML = 'Please log ' +
+	          'into this app.';
+	      } else {
+	        // The person is not logged into Facebook, so we are not sure if
+	        // they are logged into this app or not.
+	        document.getElementById('status').innerHTML = 'Please log ' +
+	          'into Facebook.';
+	      }
+	    }
+	
+	    // This function is called when someone finishes with the Login
+	    // Button.  See the onlogin handler attached to it in the sample
+	    // code below.
+	    function checkLoginState() {
+	      FB.getLoginStatus(function(response) {
+	        statusChangeCallback(response);
+	      });
+	    }
+	    
+	    window.fbAsyncInit = function() {
+	      FB.init({
+	        appId      : '181660858874581',
+	        xfbml      : true,
+	        version    : 'v2.5'
+	      });
+	    };
+	
+	    (function(d, s, id){
+	       var js, fjs = d.getElementsByTagName(s)[0];
+	       if (d.getElementById(id)) {return;}
+	       js = d.createElement(s); js.id = id;
+	       js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=181660858874581";
+	       fjs.parentNode.insertBefore(js, fjs);
+	     }(document, 'script', 'facebook-jssdk'));
+	
+	  function testAPI() {
+	      //
+	      ('Welcome!  Fetching your information.... ');
+	      FB.api('/me?fields=id,name,gender,link,friends,events', function(response) {
+	        eventData = response.events.data;
+	        friendData = response.friends.data;
+	
+	        //console.log('Successful login for: ' + response.name);
+	        document.getElementById('welcome').innerHTML =
+	          'Welcome ' + response.name + '!';
+	          $("#welcome").animate({"opacity":"1"},300);
+	          for(var i = 0; i< response.events.data.length ; i++){
+	            initEvent(i);
+	          }
+	      });
+	    }
+	
+	
+	
+	
+	  function initEvent(n){
+	    var eventCoords;
+	    var lat;
+	    var lng;
+	    var numAttend;
+	    var friendCount = 0;
+	    FB.api('/'+eventData[n].id +'?fields=name,description,start_time,cover,place,attending', function(response) {
+	        
+	        //console.log(response);
+	        numAttend = response.attending.data.length;
+	        
+	        var start = new Date(response.start_time);
+	         var today = new Date();
+	
+	          var dd = today.getDate();
+	          var mm = today.getMonth()+1; //January is 0!
+	          var yyyy = today.getFullYear();
+	          today.setDate(today.getDate() - 1);
+	          if (start < today) {
+	                  return;
+	          }
+	          else{}
+		eventArray.push(response);
+	
+	          var parsedRequest = '';
+	          for(var i = 0; i < response.place.name.length; i++){
+	            if(response.place.name.charAt(i) == ' '){
+	              parsedRequest = parsedRequest + "+";
+	            }
+	            else{
+	              parsedRequest = parsedRequest + response.place.name.charAt(i);
+	            }
+	
+	          }
+	
+	          if(response.place.location!=null){
+	            parsedRequest = parsedRequest +"+"+response.place.location.city;
+	          }
+	
+	
+	          var locationString = "https://maps.googleapis.com/maps/api/geocode/json?address="+parsedRequest+"&key=AIzaSyAJT70Y4CBuw4U3Ve_Yy8F2gRLi9WrLNIs";
+	          var xmlhttp = new XMLHttpRequest();
+	
+	          xmlhttp.onreadystatechange = function() {
+	              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	                  var myArr = JSON.parse(xmlhttp.responseText);
+	                  if(myArr.status == "OK"){
+	                    for(var i=0;i<friendData.length;i++){
+	                      for(var j =0; j<response.attending.data.length;j++){
+	                        if(friendData[i].id == response.attending.data[j].id){
+	                          friendCount++;
+	                        }
+	                      }
+	                    }
+	                    
+	                    lat = myArr.results[0].geometry.location.lat;
+	                    lng = myArr.results[0].geometry.location.lng;
+	                    eventCoords = {lat: lat, lng: lng};
+	                    createMarker(eventCoords, numAttend,response,0);
+	                     
+	
+	                    var data = {
+	                      "friendCount": friendCount,
+	                      "EC": eventCoords
+	                    }
+	                     //FULL CONTAINER
+	                     dataContainer.push(data);                    
+	                  }
+	              }
+	          };
+	          xmlhttp.open("GET", locationString, true);
+	          xmlhttp.send();
+	        
+	      });
+	
+	
+	  }
+	  
+	  function createMarker(coords , numAttend,eventInfo,src){
+	    var image;
+	    if(eventInfo.description != null){
+	      if(eventInfo.description.length > 200){
+	        desc = eventInfo.description.substring(0,200)+"...";
+	      }
+	      else
+	        desc = eventInfo.description;
+	    }
+	
+	    if(numAttend >= 2){
+	      image = 'images/red1.png';
+	    }
+	    else if(numAttend >=1){
+	      image = 'images/blue1.png';
+	    }
+	    else{
+	      image = 'images/black1.png';
+	    }
+	    
+	    console.log(eventInfo);
+	    
+	     var contentString = '<div class="tom_content">'+
+	      '<div class="tom_eventImage" style="background-image:url('+eventInfo.cover.source+')">'+
+	      '</div>'+
+	      '<h1 class="tom_firstHeading">'+eventInfo.name+'</h1>'+
+	      '<div class="tom_bodyContent">Date: '+ eventInfo.start_time +'<br>'+desc+ '</div>'+
+	      '<div> Number of friends attending: '+numAttend+'</div>'+
+	      '<p>To see more click here! <a href="https://www.facebook.com/events/'+eventInfo.id+'">https://www.facebook.com/events/'+eventInfo.id+'</a></p>'+
+	      '</div><br>';
+	
+	 if(!src) var fullContent = fullContent + contentString;
+	 
+	 console.log(dataContainer);
+
+	      for(var i = 0; i<dataContainer.length; i++){
+	        if(dataContainer[i].EC.lat == coords.lat && dataContainer[i].EC.lng == coords.lng && markerContent[i] != contentString)
+	          fullContent = fullContent + markerContent[i];
+	      }
+	
+	  var infowindow = new google.maps.InfoWindow({
+	    content: fullContent
+	  });
+	
+	
+	     var marker = new google.maps.Marker({
+	      position:coords,
+	      map: map,
+	      icon: image,
+	      animation: google.maps.Animation.DROP,
+	      title: eventInfo.name
+	    });
+	    
+	    google.maps.event.addListener(map, 'click', function(event){
+	    	if(prevWindow != null) prevWindow.close()
+	    	});
+	    
+	    
+	    marker.addListener('click', function() {
+	      if(prevWindow != null) prevWindow.close();
+	      prevWindow = infowindow;
+	      infowindow.open(map, marker);
+	   });
+	
+	     markerArray.push(marker);
+             markerContent.push(contentString);
+             console.log(contentString);
+	  }
+	
+	function styleMap(n){
+	  if(document.getElementById("currentMap").innerHTML == "all" && n == 1){
+	    for(var i = 0; i < markerArray.length; i++){
+	      markerArray[i].setMap(null);
+	      console.log("test");
+
+	    }
+	    
+	
+	    for(var k = 0; k< dataContainer.length; k++){
+		console.log(eventArray[k]);
+		console.log("Test after");
+	      createMarker(dataContainer[k].EC,dataContainer[k].friendCount,eventArray[k],1);
+	    }
+	    document.getElementById("currentMap").innerHTML = "friends";
+	  }
+	  else if(document.getElementById("currentMap").innerHTML == "friends" && n == 0){
+	    for(var i = 0; i<markerArray.length;i++){
+	      markerArray[i].setMap(null);
+	      console.log("test3");
+
+	    }
+	
+	    document.getElementById("currentMap").innerHTML = "all";
+	     for(var k = 0; k< dataContainer.length; k++){
+	     console.log("test4");
+	      createMarker(dataContainer[k].EC,eventArray[k].attending.data.length,eventArray[k],0);
+	    }
+	  }
+	
+	
+	}
+	
+	</script>
+
+  </head>
+  <body>
+  <div id="welcome"></div>
+<div class="overlay-bg">
+</div>
+<div class="overlay-content popup3">
+    <p class="fbfont" style="text-align: center;">Please log in with Facebook to use our program!</p>
+	 <div id="fb-root" ></div>
+	 <br>
+	<div class="style-me" style="text-align: center;">
+	<fb:login-button id="login" scope="public_profile,email,user_friends,user_events" data-size="medium" onlogin="checkLoginState();" style="z-index:10000;">
+	</fb:login-button>
+	</div>
+	<div id="status">
+	</div>	
+</div>
+
+    <div class="base">
+
+      <!-- row1-bg (Dynamic Panel) -->
+      <div id="u0" class="ax_dynamic_panel" data-label="row1-bg">
+        <div id="u0_state0" class="panel_state" data-label="State1">
+          <div id="u0_state0_content" class="panel_state_content">
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (Header) -->
+
+      <!-- Header DP (Dynamic Panel) -->
+      <div id="u2" class="ax_dynamic_panel" data-label="Header DP">
+        <div id="u2_state0" class="panel_state" data-label="Header">
+          <div id="u2_state0_content" class="panel_state_content">
+
+            <!-- Sticky Header (Shape) -->
+            <div id="u3" class="ax_shape" data-label="Sticky Header">
+              <img id="u3_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u4" class="text">
+                <p><span/></p>
+              </div>
+            </div>
+
+            <!-- Logo - Header Nav (Shape) -->
+            <div id="u5" class="ax_paragraph" data-label="Logo - Header Nav">
+              <img id="u5_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u6" class="text">
+                <p><span style="opacity:0.6980392;">LitUp</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (Header) -->
+
+            <!-- Home (Shape) -->
+            <div id="u8" class="ax_shape" data-label="Home">
+              <img id="u8_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u9" class="text">
+                <p><span>HOME</span></p>
+              </div>
+            </div>
+
+            <!-- About (Shape) -->
+            <div id="u10" class="ax_shape" data-label="About">
+              <img id="u10_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u11" class="text">
+                <p><span>ABOUT</span></p>
+              </div>
+            </div>
+
+            <!-- Contact (Shape) -->
+            <div id="u12" class="ax_shape" data-label="Contact">
+              <img id="u12_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u13" class="text">
+                <p><span>CONTACT</span></p>
+              </div>
+            </div>
+
+            <!-- Contact (Shape) -->
+            <div id="u14" class="ax_shape" data-label="Contact">
+              <img id="u14_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u15" class="text">
+                <p><span>GET STARTED</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="u2_state1" class="panel_state" data-label="Sticky Header">
+          <div id="u2_state1_content" class="panel_state_content">
+
+            <!-- Logo - Header Nav (Shape) -->
+            <div id="u16" class="ax_paragraph" data-label="Logo - Header Nav">
+              <img id="u16_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u17" class="text">
+                <p><span>LitUp</span></p>
+              </div>
+            </div>
+
+            <!-- Sticky Header Divider Line (Horizontal Line) -->
+            <div id="u18" class="ax_horizontal_line" data-label="Sticky Header Divider Line">
+              <img id="u18_start" class="img " src="resources/images/transparent.gif" alt="u18_start"/>
+              <img id="u18_end" class="img " src="resources/images/transparent.gif" alt="u18_end"/>
+              <img id="u18_line" class="img " src="images/home/sticky_header_divider_line_u18_line.png" alt="u18_line"/>
+            </div>
+
+            <!-- Unnamed (Header) -->
+
+            <!-- Home (Shape) -->
+            <div id="u20" class="ax_shape" data-label="Home">
+              <img id="u20_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u21" class="text">
+                <p><span>HOME</span></p>
+              </div>
+            </div>
+
+            <!-- About (Shape) -->
+            <div id="u22" class="ax_shape" data-label="About">
+              <img id="u22_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u23" class="text">
+                <p><span>ABOUT</span></p>
+              </div>
+            </div>
+
+            <!-- Contact (Shape) -->
+            <div id="u24" class="ax_shape" data-label="Contact">
+              <img id="u24_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u25" class="text">
+                <p><span>CONTACT</span></p>
+              </div>
+            </div>
+
+            <!-- Contact (Shape) -->
+            <div id="u26" class="ax_shape" data-label="Contact">
+              <img id="u26_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u27" class="text">
+                <p><span>GET STARTED</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Divider (Dynamic Panel) -->
+      <div id="u28" class="ax_dynamic_panel" data-label="Header Divider">
+        <div id="u28_state0" class="panel_state" data-label="Header Divider">
+          <div id="u28_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (Shape) -->
+            <div id="u29" class="ax_shape">
+              <img id="u29_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u30" class="text">
+                <p><span/></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="u28_state1" class="panel_state" data-label="Sticky Header Divider">
+          <div id="u28_state1_content" class="panel_state_content">
+
+            <!-- Unnamed (Shape) -->
+            <div id="u31" class="ax_shape">
+              <img id="u31_img" class="img " src="resources/images/transparent.gif"/>
+              <!-- Unnamed () -->
+              <div id="u32" class="text">
+                <p><span/></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- TOMMY CODE STARTS -->
+
+    <div id="tommyContain" class="fadein" style="width: 100%; height: 100%; position: fixed; margin-top: 50px; z-index: 0;" >
+
+		
+	<div id="currentMap" style="display:none;">all</div>
+	
+	<div id="map"></div>
+	    
+	<div id ="option_container">
+	  <div id="all" onclick="styleMap(0)">ALL</div>
+	  <div id="friends" onclick="styleMap(1)">FRIENDS</div>
+	</div>
+
+	</div>
+	</div>
+
+
+  </body>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?callback=init" >
+    </script>
+</html>
